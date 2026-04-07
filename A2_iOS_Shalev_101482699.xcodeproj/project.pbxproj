@@ -315,20 +315,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A201000000000000000A000B /* Build configuration list for PBXProject "A2_iOS_Shalev_101482699" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A201000000000000000A000C /* Debug */,
-				A201000000000000000A000D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A201000000000000000A0007 /* Build configuration list for PBXNativeTarget "A2_iOS_Shalev_101482699" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A201000000000000000A000E /* Debug */,
 				A201000000000000000A000F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A201000000000000000A000B /* Build configuration list for PBXProject "A2_iOS_Shalev_101482699" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A201000000000000000A000C /* Debug */,
+				A201000000000000000A000D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
