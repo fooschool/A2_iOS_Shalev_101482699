@@ -15,6 +15,7 @@ struct ProductBrowseView: View {
     ) private var products: FetchedResults<Product>
 
     @State private var currentIndex: Int = 0
+    @State private var slideForward: Bool = true
 
     var body: some View {
         NavigationStack {
@@ -28,10 +29,14 @@ struct ProductBrowseView: View {
                 } else {
                     VStack(spacing: 0) {
                         ProductDetailView(product: products[safeIndex])
+                            .id(currentIndex)
+                            .transition(slideTransition)
 
                         HStack(spacing: 16) {
                             Button {
-                                if currentIndex > 0 {
+                                guard currentIndex > 0 else { return }
+                                slideForward = false
+                                withAnimation(.easeInOut(duration: 0.3)) {
                                     currentIndex -= 1
                                 }
                             } label: {
@@ -43,7 +48,9 @@ struct ProductBrowseView: View {
                             .disabled(currentIndex <= 0)
 
                             Button {
-                                if currentIndex < products.count - 1 {
+                                guard currentIndex < products.count - 1 else { return }
+                                slideForward = true
+                                withAnimation(.easeInOut(duration: 0.3)) {
                                     currentIndex += 1
                                 }
                             } label: {
@@ -66,5 +73,19 @@ struct ProductBrowseView: View {
 
     private var safeIndex: Int {
         min(max(currentIndex, 0), products.count - 1)
+    }
+
+    private var slideTransition: AnyTransition {
+        if slideForward {
+            return .asymmetric(
+                insertion: .move(edge: .trailing).combined(with: .opacity),
+                removal: .move(edge: .leading).combined(with: .opacity)
+            )
+        } else {
+            return .asymmetric(
+                insertion: .move(edge: .leading).combined(with: .opacity),
+                removal: .move(edge: .trailing).combined(with: .opacity)
+            )
+        }
     }
 }
