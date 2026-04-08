@@ -12,6 +12,10 @@ import SwiftUI
 struct A2_iOS_Shalev_101482699App: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+        persistenceController.seedIfNeeded()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
