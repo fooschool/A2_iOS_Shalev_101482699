@@ -1,0 +1,46 @@
+//
+//  ProductDetailView.swift
+//  A2_iOS_Shalev_101482699
+//
+//  Created by Shalev Haimovitz on 2026-04-07.
+//
+
+import SwiftUI
+
+struct ProductDetailView: View {
+    let product: Product
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                Text(product.name ?? "")
+                    .font(.largeTitle)
+                    .bold()
+
+                Text(product.productDescription ?? "")
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+
+                Divider()
+
+                detailRow(label: "Price", value: String(format: "$%.2f", product.price))
+                detailRow(label: "Provider", value: product.provider ?? "")
+                detailRow(label: "Product ID", value: "#\(product.id)")
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .navigationTitle("Product")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func detailRow(label: String, value: String) -> some View {
+        HStack {
+            Text(label)
+                .foregroundStyle(.secondary)
+            Spacer()
+            Text(value)
+                .fontWeight(.medium)
+        }
+    }
+}

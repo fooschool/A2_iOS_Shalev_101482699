@@ -27,14 +27,18 @@ struct ProductListView: View {
                     )
                 } else {
                     List(products) { product in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(product.name ?? "")
-                                .font(.headline)
-                            Text(product.productDescription ?? "")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+                        NavigationLink {
+                            ProductDetailView(product: product)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(product.name ?? "")
+                                    .font(.headline)
+                                Text(product.productDescription ?? "")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .padding(.vertical, 4)
                         }
-                        .padding(.vertical, 4)
                     }
                 }
             }
