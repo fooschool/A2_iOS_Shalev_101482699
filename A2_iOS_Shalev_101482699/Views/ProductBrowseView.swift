@@ -32,35 +32,41 @@ struct ProductBrowseView: View {
                             .id(currentIndex)
                             .transition(slideTransition)
 
-                        HStack(spacing: 16) {
-                            Button {
-                                guard currentIndex > 0 else { return }
-                                slideForward = false
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    currentIndex -= 1
-                                }
-                            } label: {
-                                Label("Previous", systemImage: "chevron.left")
-                                    .frame(maxWidth: .infinity)
-                            }
-                            .buttonStyle(.bordered)
-                            .controlSize(.large)
-                            .disabled(currentIndex <= 0)
+                        VStack(spacing: 12) {
+                            Text("\(safeIndex + 1) of \(products.count)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
 
-                            Button {
-                                guard currentIndex < products.count - 1 else { return }
-                                slideForward = true
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    currentIndex += 1
+                            HStack(spacing: 16) {
+                                Button {
+                                    guard currentIndex > 0 else { return }
+                                    slideForward = false
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        currentIndex -= 1
+                                    }
+                                } label: {
+                                    Label("Previous", systemImage: "chevron.left")
+                                        .frame(maxWidth: .infinity)
                                 }
-                            } label: {
-                                Label("Next", systemImage: "chevron.right")
-                                    .labelStyle(.titleAndIcon)
-                                    .frame(maxWidth: .infinity)
+                                .buttonStyle(.bordered)
+                                .controlSize(.large)
+                                .disabled(currentIndex <= 0)
+
+                                Button {
+                                    guard currentIndex < products.count - 1 else { return }
+                                    slideForward = true
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        currentIndex += 1
+                                    }
+                                } label: {
+                                    Label("Next", systemImage: "chevron.right")
+                                        .labelStyle(.titleAndIcon)
+                                        .frame(maxWidth: .infinity)
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .controlSize(.large)
+                                .disabled(currentIndex >= products.count - 1)
                             }
-                            .buttonStyle(.borderedProminent)
-                            .controlSize(.large)
-                            .disabled(currentIndex >= products.count - 1)
                         }
                         .padding()
                     }
