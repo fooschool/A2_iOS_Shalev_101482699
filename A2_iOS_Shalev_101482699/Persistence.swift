@@ -59,6 +59,19 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 
+    func resetAndReseed() {
+        let context = container.viewContext
+        let request: NSFetchRequest<Product> = Product.fetchRequest()
+        if let allProducts = try? context.fetch(request) {
+            for product in allProducts {
+                context.delete(product)
+            }
+        }
+        try? context.save()
+        UserDefaults.standard.set(false, forKey: "hasSeededProducts")
+        seedIfNeeded()
+    }
+
     func seedIfNeeded() {
         let key = "hasSeededProducts"
         guard !UserDefaults.standard.bool(forKey: key) else { return }

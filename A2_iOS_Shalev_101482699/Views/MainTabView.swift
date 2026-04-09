@@ -16,6 +16,9 @@ struct MainTabView: View {
             Tab("List", systemImage: "list.bullet") {
                 ProductListView()
             }
+            Tab("Settings", systemImage: "gear") {
+                SettingsView()
+            }
             Tab(role: .search) {
                 SearchResultsView()
             }
