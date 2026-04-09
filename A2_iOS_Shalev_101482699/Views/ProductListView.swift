@@ -30,10 +30,16 @@ struct ProductListView: View {
                         NavigationLink {
                             ProductDetailView(product: product)
                         } label: {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(product.name ?? "")
-                                    .font(.headline)
-                                Text(product.productDescription ?? "")
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(product.name ?? "")
+                                        .font(.headline)
+                                    Text(product.productDescription ?? "")
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Text(product.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "CAD")))
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
