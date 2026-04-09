@@ -27,7 +27,7 @@ struct ProductDetailView: View {
 
                 Divider()
 
-                detailRow(label: "Price", value: String(format: "$%.2f", product.price))
+                detailRow(label: "Price", value: product.price.formatted(.currency(code: Locale.current.currency?.identifier ?? "CAD")))
                 detailRow(label: "Provider", value: product.provider ?? "")
                 detailRow(label: "Product ID", value: "#\(product.id)")
             }
