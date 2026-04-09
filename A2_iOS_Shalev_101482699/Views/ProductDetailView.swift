@@ -5,10 +5,14 @@
 //  Created by Shalev Haimovitz on 2026-04-07.
 //
 
+import CoreData
 import SwiftUI
 
 struct ProductDetailView: View {
     let product: Product
+
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ScrollView {
@@ -32,6 +36,21 @@ struct ProductDetailView: View {
         }
         .navigationTitle("Product")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(role: .destructive) {
+                    deleteProduct()
+                } label: {
+                    Image(systemName: "trash")
+                }
+            }
+        }
+    }
+
+    private func deleteProduct() {
+        viewContext.delete(product)
+        try? viewContext.save()
+        dismiss()
     }
 
     private func detailRow(label: String, value: String) -> some View {
