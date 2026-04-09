@@ -14,6 +14,8 @@ struct ProductDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
 
+    @State private var showingEdit = false
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -38,12 +40,22 @@ struct ProductDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showingEdit = true
+                } label: {
+                    Image(systemName: "pencil")
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
                 Button(role: .destructive) {
                     deleteProduct()
                 } label: {
                     Image(systemName: "trash")
                 }
             }
+        }
+        .sheet(isPresented: $showingEdit) {
+            EditProductView(product: product)
         }
     }
 
